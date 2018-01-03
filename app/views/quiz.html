@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-sm-8">
+        <h4>Progress</h4>
+
+        <div class="btn-toolbar">
+            <button class="btn" ng-repeat="answer in quiz.DataService.quizQuestions"
+                    ng-class="{'btn-danger': !answer.selected, 'btn-info': answer.selected}"
+            ><span class="glyphicon" ng-class="{'glyphicon-question-sign': !answer.selected,
+            'glyphicon-pencil': answer.selected}"></span></button>
+        </div>
+    </div>
+
+    <div class="col-sm-4">
+
+
+        <div class="row">
+            <h4>Legend</h4>
+
+            <div class="col-sm-4">
+                <button class="btn btn-info"><span class="glyphicon glyphicon-pencil"></span></button>
+                <div>Answer</div>
+            </div>
+            <div class="col-sm-4">
+                <button class="btn btn-danger"><span class="glyphicon glyphicon-question-sign"></span></button>
+                <div>Unanswer</div>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <h2>Questions</h2>
+
+    <div class="well well-sm">
+        <div class="row">
+            <div class="col-sm-12">
+                <h4>{{quiz.activeQuestion+ 1 + '. ' + quiz.DataService.quizQuestions[quiz.activeQuestion].text}}</h4>
+            </div>
+            <div class="col-sm-6"
+                 ng-repeat="answer in quiz.DataService.quizQuestions[quiz.activeQuestion].possibilities">
+                <h4 class="answer">{{answer.answer}}</h4>
+            </div>
+        </div>
+    </div>
+</div>

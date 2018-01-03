@@ -1,0 +1,1 @@
+angular.module('javascript-quiz', ['ui.router']);
