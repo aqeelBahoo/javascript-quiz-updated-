@@ -1,21 +1,21 @@
 angular.module('javascript-quiz')
     .controller('quizCtrl', quizController);
 
-quizController.$inject = ['DataService'];
+quizController.$inject = ['DataService', $state];
 
-function quizController(DataService) {
+function quizController(DataService, $state) {
     var vm = this;
     vm.DataService = DataService;
     vm.selectedAnswer = selectedAnswer;
     vm.questionAnswered = questionAnswered;
     vm.setActiveQuestion = setActiveQuestion;
+    vm.isError = false;
 
     vm.activeQuestion = 0;
     var numAnsweredQuestions = 0;
 
     function selectedAnswer(index) {
         DataService.quizQuestions[vm.activeQuestion].selected = index;
-        console.log(DataService.quizQuestions[vm.activeQuestion].selected);
     }
 
     function questionAnswered() {
@@ -23,6 +23,9 @@ function quizController(DataService) {
             numAnsweredQuestions++;
             if (numAnsweredQuestions >= DataService.quizQuestions.length) {
                 //finalize the quiz
+                vm.isError = false;
+                $state.go('result');
+                return
             }
         }
         setActiveQuestion();
@@ -30,16 +33,15 @@ function quizController(DataService) {
 
     function setActiveQuestion() {
         var breakout = true;
-
-        while (breakout){
-            vm.activeQuestion = vm.activeQuestion < DataService.quizQuestions.length-1 ? ++vm.activeQuestion: 0;
-            if(DataService.quizQuestions[vm.activeQuestion].selected == null){
+        while (breakout) {
+            vm.activeQuestion = vm.activeQuestion < DataService.quizQuestions.length - 1 ? ++vm.activeQuestion : 0;
+            if (vm.activeQuestion == 0) {
+                vm.isError = true;
+            }
+            if (DataService.quizQuestions[vm.activeQuestion].selected == null) {
                 breakout = false;
             }
-
         }
-
-
     }
 
 }

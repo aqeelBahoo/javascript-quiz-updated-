@@ -30,7 +30,11 @@
 <div class="row">
     <h2>Questions</h2>
 
-    <div class="well well-md">
+    <h4 class="alert alert-danger" ng-show="quiz.isError">Alert! You not answered the all questions..
+        <span class="close" ng-click="quiz.isError = false">&times</span>
+    </h4>
+
+    <div class="well well-md" >
         <div class="row">
             <div class="col-sm-12">
                 <h4>{{quiz.activeQuestion+ 1 + '. ' + quiz.DataService.quizQuestions[quiz.activeQuestion].text}}</h4>
@@ -41,9 +45,12 @@
                     ng-class="{'bg-info': $index === quiz.DataService.quizQuestions[quiz.activeQuestion].selected}"
                 >{{answer.answer}}</h4>
             </div>
-
         </div>
 
         <button class="btn btn-warning" ng-click="quiz.questionAnswered()">Continue</button>
     </div>
+
+
+
+
 </div>

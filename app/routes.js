@@ -15,4 +15,9 @@ angular.module('javascript-quiz')
                 controller: 'quizCtrl',
                 controllerAs: 'quiz'
             })
+            .state('result', {
+                url: '/result',
+                templateUrl: 'views/result.html',
+                controller: 'resultCtrl as result'
+            })
     })
