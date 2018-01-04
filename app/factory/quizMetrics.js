@@ -1,5 +1,5 @@
 angular.module('javascript-quiz')
-    .factory('QuizMetrics', QuizMetrics)
+    .factory('QuizMetrics', QuizMetrics);
 
 QuizMetrics.$inject = ['DataService'];
 
@@ -7,12 +7,14 @@ function QuizMetrics(DataService) {
     var metrics = {
         activeResult: activeResult,
         percentage: percentage,
+        resetQuiz: resetQuiz,
+        isError: false,
+        activeQuestion: 0,
+        numAnsweredQuestions: 0,
         correctAnswer: 0
     };
 
-
     return metrics;
-
 
     function activeResult() {
         DataService.quizQuestions.forEach(function (questionAnswer, index) {
@@ -24,13 +26,21 @@ function QuizMetrics(DataService) {
                 DataService.quizQuestions[index].correct = false;
             }
         })
-
-        console.log(DataService.quizQuestions);
     }
 
     function percentage() {
-       return  metrics.correctAnswer / DataService.quizQuestions.length * 100;
+        return metrics.correctAnswer / DataService.quizQuestions.length * 100;
     }
 
+    function resetQuiz() {
+        DataService.quizQuestions.forEach(function (questionAnswer) {
+            questionAnswer.selected = null;
+            questionAnswer.correct = null;
+            metrics.correctAnswer = 0;
+        })
+        metrics.correctAnswer = 0;
+        metrics.numAnsweredQuestions = 0;
+        metrics.activeQuestion = 0;
+    }
 
 }

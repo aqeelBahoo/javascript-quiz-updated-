@@ -10,7 +10,7 @@ angular.module('javascript-quiz')
                 controllerAs: 'form'
             })
             .state('quiz', {
-                url: '/quiz',
+                url: '/quiz/:id',
                 templateUrl: 'views/quiz.html',
                 controller: 'quizCtrl',
                 controllerAs: 'quiz'

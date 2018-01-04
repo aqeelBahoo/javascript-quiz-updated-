@@ -6,9 +6,6 @@ function dataService() {
         quizQuestions : quizQuestions,
         correctAnswers: correctAnswers
     };
-
-
-
     return data;
 }
 
@@ -108,7 +105,7 @@ var quizQuestions = [
         selected: null,
         correct: null
     },
-    /*{
+     {
      'text': 'How do you create a function in JavaScript?',
      'possibilities': [
      {
@@ -119,9 +116,6 @@ var quizQuestions = [
      },
      {
      answer: 'function myFunction()'
-     },
-     {
-     answer: ' '
      }
      ],
      selected: null,
@@ -138,9 +132,6 @@ var quizQuestions = [
      },
      {
      answer: 'call myFunction()'
-     },
-     {
-     answer: ' '
      }
      ],
      selected: null,
@@ -195,14 +186,11 @@ var quizQuestions = [
      },
      {
      answer: 'while (i <= 10; i++)'
-     },
-     {
-     answer: ' '
      }
      ],
      selected: null,
      correct: null
-     },
+     }/*,
      {
      'text': 'How does a FOR loop start?',
      'possibilities': [

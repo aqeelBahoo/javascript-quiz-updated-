@@ -35,7 +35,7 @@
     <div class="col-sm-12">
         <h2>You Scored</h2>
 
-        <h2><strong>{{result.QuizMetrics.percentage}}</strong></h2>
+        <h2><strong>{{result.QuizMetrics.percentage()}} %</strong></h2>
     </div>
 </div>
 
@@ -56,8 +56,21 @@
                     $index !== result.DataService.correctAnswers[result.activeQuestion]
                     }">
                     {{answer.answer}}
+
+                    <span class="pull-right"
+                          ng-show="$index !== result.DataService.correctAnswers[result.activeQuestion] &&
+                    $index == result.DataService.quizQuestions[result.activeQuestion].selected">
+                        Your Answer.
+                    </span>
+
+                    <span class="pull-right"
+                          ng-show="$index == result.DataService.correctAnswers[result.activeQuestion]">
+                        Correct Answer.
+                    </span>
                 </h4>
             </div>
         </div>
     </div>
+
+    <button class="btn btn-primary btn-lg" ng-click="result.reset()">Go To User Form</button>
 </div>

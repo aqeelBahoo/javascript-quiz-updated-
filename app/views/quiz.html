@@ -30,27 +30,25 @@
 <div class="row">
     <h2>Questions</h2>
 
-    <h4 class="alert alert-danger" ng-show="quiz.isError">Alert! You not answered the all questions..
-        <span class="close" ng-click="quiz.isError = false">&times</span>
+    <h4 class="alert alert-danger" ng-show="quiz.QuizMetrics.isError">Alert! You not answered the all questions..
+        <span class="close" ng-click="quiz.QuizMetrics.isError = false">&times</span>
     </h4>
 
-    <div class="well well-md" >
+    <div class="well well-md">
         <div class="row">
             <div class="col-sm-12">
-                <h4>{{quiz.activeQuestion+ 1 + '. ' + quiz.DataService.quizQuestions[quiz.activeQuestion].text}}</h4>
+                <h4>{{quiz.QuizMetrics.activeQuestion +1 + '. ' +
+                    quiz.DataService.quizQuestions[quiz.QuizMetrics.activeQuestion].text}}</h4>
             </div>
             <div class="col-sm-6"
-                 ng-repeat="answer in quiz.DataService.quizQuestions[quiz.activeQuestion].possibilities">
+                 ng-repeat="answer in quiz.DataService.quizQuestions[quiz.QuizMetrics.activeQuestion].possibilities">
                 <h4 class="answer" ng-click="quiz.selectedAnswer($index)"
-                    ng-class="{'bg-info': $index === quiz.DataService.quizQuestions[quiz.activeQuestion].selected}"
+                    ng-class="{'bg-info': $index === quiz.DataService.quizQuestions[quiz.QuizMetrics.activeQuestion].selected}"
                 >{{answer.answer}}</h4>
             </div>
         </div>
 
         <button class="btn btn-warning" ng-click="quiz.questionAnswered()">Continue</button>
     </div>
-
-
-
 
 </div>
