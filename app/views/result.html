@@ -3,7 +3,12 @@
         <h2>Results: </h2>
 
         <div class="btn-toolbar">
-            <button class="btn"></button>
+            <button class="btn" ng-repeat="answer in result.DataService.quizQuestions"
+                    ng-class="{'btn-success': answer.correct , 'btn-danger': !answer.correct}"
+                    ng-click="result.selectQuestion($index)">
+                <span class="glyphicon" ng-class="{'glyphicon-ok': answer.correct,
+                 'glyphicon-remove': !answer.correct}"></span>
+            </button>
         </div>
     </div>
     <div class="col-sm-4">
@@ -30,7 +35,7 @@
     <div class="col-sm-12">
         <h2>You Scored</h2>
 
-        <h2>60%</h2>
+        <h2><strong>{{result.QuizMetrics.percentage}}</strong></h2>
     </div>
 </div>
 
@@ -40,9 +45,19 @@
     <div class="well well-md">
         <div class="row">
             <div class="col-sm-12">
-                <h4>1. fgfdf fdgdfgf</h4>
+                <h4>{{result.activeQuestion+ 1 + '. ' +
+                    result.DataService.quizQuestions[result.activeQuestion].text}}</h4>
             </div>
-            <div class="col-sm-6"></div>
+            <div class="col-sm-6"
+                 ng-repeat="answer in result.DataService.quizQuestions[result.activeQuestion].possibilities">
+                <h4 class="answer"
+                    ng-class="{'bg-info': $index == result.DataService.correctAnswers[result.activeQuestion],
+                    'bg-danger': $index == result.DataService.quizQuestions[result.activeQuestion].selected &&
+                    $index !== result.DataService.correctAnswers[result.activeQuestion]
+                    }">
+                    {{answer.answer}}
+                </h4>
+            </div>
         </div>
     </div>
 </div>
