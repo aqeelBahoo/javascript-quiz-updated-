@@ -1,9 +1,9 @@
 angular.module('javascript-quiz')
     .controller('quizCtrl', quizController);
 
-quizController.$inject = ['DataService', $state];
+quizController.$inject = ['DataService', '$state', 'QuizMetrics'];
 
-function quizController(DataService, $state) {
+function quizController(DataService, $state, QuizMetrics) {
     var vm = this;
     vm.DataService = DataService;
     vm.selectedAnswer = selectedAnswer;
@@ -24,8 +24,9 @@ function quizController(DataService, $state) {
             if (numAnsweredQuestions >= DataService.quizQuestions.length) {
                 //finalize the quiz
                 vm.isError = false;
+                QuizMetrics.activeResult();
                 $state.go('result');
-                return
+                return;
             }
         }
         setActiveQuestion();

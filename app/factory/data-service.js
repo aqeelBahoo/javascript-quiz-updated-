@@ -3,7 +3,8 @@ angular.module('javascript-quiz')
 
 function dataService() {
     var data = {
-        quizQuestions : quizQuestions
+        quizQuestions : quizQuestions,
+        correctAnswers: correctAnswers
     };
 
 
@@ -412,4 +413,4 @@ var quizQuestions = [
      correct: null
      }*/
 ];
-var correctAnswer = [2, 2, 2, 1, 3, 2, 0, 1, 2, 0, 0, 0, 1, 1, 0, 1, 2, 0, 1, 1, 0];
+var correctAnswers = [2, 2, 2, 1, 3, 2, 0, 1, 2, 0, 0, 0, 1, 1, 0, 1, 2, 0, 1, 1, 0];
