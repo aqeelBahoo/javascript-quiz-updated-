@@ -1,18 +1,22 @@
 angular.module('javascript-quiz')
     .controller('quizCtrl', quizController);
 
-quizController.$inject = ['DataService', '$state', 'QuizMetrics', '$stateParams'];
+quizController.$inject = ['DataService', '$state', 'QuizMetrics', '$stateParams', '$rootScope', 'UserAuth'];
 
-function quizController(DataService, $state, QuizMetrics, $stateParams) {
+function quizController(DataService, $state, QuizMetrics, $stateParams, $rootScope, UserAuth) {
     console.log($stateParams)
+    /*$rootScope.$on("stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
+     console.log('toState.name: ' + toState.name);
+     console.log('fromState.name: ' + fromState.name)
+     });*/
     var vm = this;
     vm.DataService = DataService;
     vm.QuizMetrics = QuizMetrics;
     vm.selectedAnswer = selectedAnswer;
     vm.questionAnswered = questionAnswered;
     vm.setActiveQuestion = setActiveQuestion;
-    if($stateParams.id){
-        QuizMetrics.activeQuestion = $stateParams.id-1;
+    if ($stateParams.id) {
+        QuizMetrics.activeQuestion = $stateParams.id - 1;
     }
     function selectedAnswer(index) {
         DataService.quizQuestions[QuizMetrics.activeQuestion].selected = index;
@@ -26,6 +30,7 @@ function quizController(DataService, $state, QuizMetrics, $stateParams) {
                 //finalize the quiz
                 QuizMetrics.isError = false;
                 QuizMetrics.activeResult();
+                UserAuth.resultActive = true;
                 $state.go('result');
                 return;
             }
@@ -37,7 +42,7 @@ function quizController(DataService, $state, QuizMetrics, $stateParams) {
         var breakout = true;
         while (breakout) {
             QuizMetrics.activeQuestion = QuizMetrics.activeQuestion < DataService.quizQuestions.length - 1 ? ++QuizMetrics.activeQuestion : 0;
-            $state.go('quiz', ({id: QuizMetrics.activeQuestion+1}));
+            $state.go('quiz', ({id: QuizMetrics.activeQuestion + 1}));
 
             if (QuizMetrics.activeQuestion == 0) {
                 QuizMetrics.isError = true;
@@ -47,5 +52,4 @@ function quizController(DataService, $state, QuizMetrics, $stateParams) {
             }
         }
     }
-
 }

@@ -1,7 +1,7 @@
 angular.module('javascript-quiz')
     .controller('resultCtrl', resultController);
-resultController.$inject = ['DataService', 'QuizMetrics', '$state'];
-function resultController(DataService, QuizMetrics, $state) {
+resultController.$inject = ['DataService', 'QuizMetrics', '$state', 'UserAuth'];
+function resultController(DataService, QuizMetrics, $state, UserAuth) {
     var vm = this;
     vm.DataService = DataService;
     vm.QuizMetrics = QuizMetrics;
@@ -15,7 +15,10 @@ function resultController(DataService, QuizMetrics, $state) {
 
     function reset() {
         QuizMetrics.resetQuiz();
-        $state.go('user-form');
+        UserAuth.removeToken();
+        UserAuth.isUserAuthenticate = false;
+        UserAuth.removeToken();
+        $state.go('login');
     }
 
 }

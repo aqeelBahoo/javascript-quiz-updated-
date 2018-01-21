@@ -41,6 +41,7 @@ function QuizMetrics(DataService) {
         metrics.correctAnswer = 0;
         metrics.numAnsweredQuestions = 0;
         metrics.activeQuestion = 0;
+
     }
 
 }
