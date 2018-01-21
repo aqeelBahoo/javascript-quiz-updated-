@@ -1,5 +1,5 @@
 var app = angular.module('javascript-quiz')
-app.config(function ($urlRouterProvider, $stateProvider) {
+app.config(function ($urlRouterProvider, $stateProvider, $locationProvider) {
     $urlRouterProvider.otherwise('login');
 
     $stateProvider
@@ -37,6 +37,7 @@ app.config(function ($urlRouterProvider, $stateProvider) {
             authentication: true
         })
 
+    $locationProvider.html5Mode(true);
 
     //Protect authentication routes
 
